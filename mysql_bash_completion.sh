@@ -1,6 +1,6 @@
 _mysql()
 {
-    local prefix=${COMP_WORDS[COMP_CWORD]}
+    local cur=${COMP_WORDS[COMP_CWORD]}
     local options=''
 
     # Get dash options
@@ -12,7 +12,7 @@ _mysql()
     # Get database names
     options="$options $(mysql -uroot test -e 'show databases' | sed -n '2,$ p' | xargs)"
 
-    COMPREPLY=( $(compgen -W "$options" -- $prefix) )
+    COMPREPLY=( $(compgen -W "$options" -- $cur) )
 }
 
 complete -F _mysql mysql
