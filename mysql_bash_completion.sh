@@ -1,11 +1,16 @@
-#!/usr/bin/env bash
-
 _mysql()
 {
     local prefix=${COMP_WORDS[COMP_CWORD]}
-    local words=$(mysql -uroot test -e 'show databases' | sed -n '2,$ p' | xargs)
+    local options=''
 
-    COMPREPLY=( $(compgen -W "$words" -- $prefix) )
+    if [ "$prefix" == "-" ]
+    then
+      options=$(mysql --help | sed -n -e '/^[ ][ ]*-[^-]/ { s/,.*$//; p; }' | xargs)
+    else
+      options=$(mysql -uroot test -e 'show databases' | sed -n '2,$ p' | xargs)
+    fi
+
+    COMPREPLY=( $(compgen -W "$options" -- $prefix) )
 }
 
 complete -F _mysql mysql
