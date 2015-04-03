@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 _mysql()
 {
     local prefix=${COMP_WORDS[COMP_CWORD]}
