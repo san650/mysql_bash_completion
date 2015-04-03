@@ -15,4 +15,4 @@ _mysql()
     COMPREPLY=( $(compgen -W "$options" -- $cur) )
 }
 
-complete -F _mysql mysql
+complete -o bashdefault -o default -o nospace -F _mysql mysql
